@@ -33,6 +33,7 @@ Plugin 'tpope/vim-fugitive'
 
 call vundle#end()
 
+" set up autocomplete
 set omnifunc=syntaxcomplete#Complete
 
 
@@ -50,6 +51,8 @@ endif
 
 " Make background transparent
 hi Normal ctermbg=none
+
+set colorcolumn=80
 
 set fileformat=unix
 set fileformats=unix,dos
@@ -73,7 +76,7 @@ set hlsearch            " highlight searches
 set incsearch           " show search matches as you type
 set ignorecase          " ignore case when searching
 set smartcase           " ignore case if search pattern is all lowercase,
-                        "    case-sensitive otherwise
+                        " case-sensitive otherwise
 
 " clear out search with leader+space
 nnoremap <leader><space> :noh<cr>
@@ -81,11 +84,15 @@ nnoremap <leader><space> :noh<cr>
 
 " Whitespace rules
 "
+set tabstop=4           " size of a hard tabstop
+set shiftwidth=4        " size of an indent
+set softtabstop=0       " a combination of spaces and tabs are used to simulate
+                        " tab stops at a width other than hard tabstop
 set expandtab           " convert all typed tabs to spaces
 set copyindent          " copy the previous indentation on autoindenting
-set shiftround          " use multiple of shiftwidth when indenting with '<' and '>'
+set shiftround          " use multiple of shiftwidth when indenting with '<'
+                        " and '>'
 set showmatch           " set show matching parenthesis
-
 
 " Highlight whitespaces visually
 set list
@@ -94,28 +101,26 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.
 " Set exception for html and xml
 autocmd filetype html,xml set listchars-=tab:>.
 
-set undolevels=1000      " use many muchos levels of undo
-set title                " change the terminal's title
-set visualbell           " don't beep
-set noerrorbells         " don't beep
+set undolevels=1000     " use many muchos levels of undo
+set title               " change the terminal's title
+set visualbell          " don't beep
+set noerrorbells        " don't beep
 
 
 " Wildignore rules to restrict matching
 "
-set wildignore+=node_modules        " node_modules folder
-set wildignore+=.hg,.git,.svn       " VCS folders
-set wildignore+=*.aux,*.out,*.toc   "Latex Indermediate files
+set wildignore+=node_modules                        " node_modules folder
+set wildignore+=.hg,.git,.svn                       " VCS folders
+set wildignore+=*.aux,*.out,*.toc                   " Latex Indermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
-                                    "Binary Imgs
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest
-                                    "Compiled Object files
-set wildignore+=*.spl               "Compiled speolling world list
-set wildignore+=*.sw?               "Vim swap files
-set wildignore+=*.DS_Store          "OSX SHIT
-set wildignore+=*.luac              "Lua byt code
-set wildignore+=migrations          "Django migrations
-set wildignore+=*.pyc               "Python Object codes
-set wildignore+=*.orig              "Merge resolution files
+                                                    " Binary Imgs
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest    " Compiled Object files
+set wildignore+=*.sw?                               " Vim swap files
+set wildignore+=*.DS_Store                          " OSX files
+set wildignore+=*.luac                              " Lua byt code
+set wildignore+=migrations                          " Django migrations
+set wildignore+=*.pyc                               " Python Object codes
+set wildignore+=*.orig                              " Merge resolution files
 
 
 " Map cut and paste actions
