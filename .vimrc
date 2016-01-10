@@ -1,11 +1,14 @@
 set nocompatible
 set modelines=0
 
-" Set up Vundle
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/vundle/
 call vundle#rc()
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " Appearance
 Plugin 'tpope/vim-sensible'
@@ -14,12 +17,11 @@ Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 
 " IDE plugins
+Plugin 'tpope/vim-vinegar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
 
@@ -33,8 +35,7 @@ Plugin 'tpope/vim-fugitive'
 
 call vundle#end()
 
-" set up autocomplete
-set omnifunc=syntaxcomplete#Complete
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 " switch syntax highlighting on, when the terminal has colors
@@ -48,26 +49,18 @@ if &t_Co >= 256 || has("gui_running")
     set background=dark
 endif
 
-
-" Make background transparent
-hi Normal ctermbg=none
-
-set colorcolumn=80
-
-set fileformat=unix
-set fileformats=unix,dos
-set encoding=utf-8
-
-" Map leader to custom kev
-let mapleader = ","
+set omnifunc=syntaxcomplete#Complete    " Set up autocomplete
+hi Normal ctermbg   =none              " Make brackground transparent
+set colorcolumn     =80
+set fileformat      =unix
+set fileformats     =unix,dos
+set encoding        =utf-8
+set nowrap                              " don't wrap lines
+set number                              " show line numbers
 
 " Remove backup options
 set nobackup
 set noswapfile
-
-set nowrap              " don't wrap lines
-set number              " show line numbers
-
 
 " Search rules
 "
@@ -78,15 +71,11 @@ set ignorecase          " ignore case when searching
 set smartcase           " ignore case if search pattern is all lowercase,
                         " case-sensitive otherwise
 
-" clear out search with leader+space
-nnoremap <leader><space> :noh<cr>
-
-
 " Whitespace rules
 "
-set tabstop=4           " size of a hard tabstop
-set shiftwidth=4        " size of an indent
-set softtabstop=0       " a combination of spaces and tabs are used to simulate
+set tabstop     =4      " size of a hard tabstop
+set shiftwidth  =4      " size of an indent
+set softtabstop =0      " a combination of spaces and tabs are used to simulate
                         " tab stops at a width other than hard tabstop
 set expandtab           " convert all typed tabs to spaces
 set copyindent          " copy the previous indentation on autoindenting
@@ -101,7 +90,7 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.
 " Set exception for html and xml
 autocmd filetype html,xml set listchars-=tab:>.
 
-set undolevels=1000     " use many muchos levels of undo
+set undolevels=1000     " increase levels of undo
 set title               " change the terminal's title
 set visualbell          " don't beep
 set noerrorbells        " don't beep
@@ -109,29 +98,17 @@ set noerrorbells        " don't beep
 
 " Wildignore rules to restrict matching
 "
-set wildignore+=node_modules                        " node_modules folder
-set wildignore+=.hg,.git,.svn                       " VCS folders
-set wildignore+=*.aux,*.out,*.toc                   " Latex Indermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
-                                                    " Binary Imgs
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest    " Compiled Object files
-set wildignore+=*.sw?                               " Vim swap files
-set wildignore+=*.DS_Store                          " OSX files
-set wildignore+=*.luac                              " Lua byt code
-set wildignore+=migrations                          " Django migrations
-set wildignore+=*.pyc                               " Python Object codes
-set wildignore+=*.orig                              " Merge resolution files
-
-
-" Map cut and paste actions
-vnoremap <C-c> "+y
-vnoremap <C-x> "+x
-vnoremap <C-v> "+gP
-
-
-" autocompletion with Ctrl+space
-inoremap <c-space> <c-n>
-inoremap <Nul> <c-n>
+set wildignore +=node_modules                       " node_modules folder
+set wildignore +=.hg,.git,.svn                      " VCS folders
+set wildignore +=*.aux,*.out,*.toc                  " Latex Indermediate files
+set wildignore +=*.jpg,*.bmp,*.gif,*.png,*.jpeg     " Binary Images
+set wildignore +=*.o,*.obj,*.exe,*.dll,*.manifest   " Compiled Object files
+set wildignore +=*.sw?                              " Vim swap files
+set wildignore +=*.DS_Store                         " OSX files
+set wildignore +=*.luac                             " Lua byt code
+set wildignore +=migrations                         " Django migrations
+set wildignore +=*.pyc                              " Python Object codes
+set wildignore +=*.orig                             " Merge resolution files
 
 " Save file as root after opening a file without root privileges
 cmap w!! w !sudo tee % >/dev/null
@@ -139,11 +116,11 @@ cmap w!! w !sudo tee % >/dev/null
 " http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
-
 " Splits
 set splitbelow
 set splitright
 
+" Split navigation commands
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -151,28 +128,27 @@ nnoremap <C-H> <C-W><C-H>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
-"                     PLUGINS
+"               PLUGIN CONFIGURATIONS
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
-" vim-airline plugin configuration
+" vim-airline
 "
 set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
 set laststatus=2
 set noshowmode                  " hide default mode indicator
 let g:airline_theme             = 'luna'
 let g:airline_powerline_fonts   = 1
-let g:Powerline_symbols = 'fancy'
-
-" enable list of buffers on top
+let g:Powerline_symbols         = 'fancy'
 let g:airline#extensions#tabline#enabled = 1
+                                " enable list of buffers on top
 
 
-" vim-gitgutter plugin configuration
+" vim-gitgutter
 "
 let g:gitgutter_updatetime = 750
 
 
-" vim-flake8 plugin configuration
+" vim-flake8
 "
 let g:flake8_show_in_gutter = 1
 
@@ -180,12 +156,11 @@ let g:flake8_show_in_gutter = 1
 autocmd BufWritePost *.py call Flake8()
 
 
-" Syntastic plugin configuration
+" Syntastic
 "
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -195,26 +170,21 @@ let g:syntastic_check_on_wq = 0
 " Toggle Tagbar
 nmap <F8> :TagbarToggle<CR>
 
+
 " Toggle NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
-" vim-easytags configuration
-"
-" Where to look for tags files
-set tags=./tags;,~/.vimtags
-" Sensible defaults
-let g:easytags_events = ['BufReadPost', 'BufWritePost']
-let g:easytags_async = 1
-let g:easytags_dynamic_files = 2
-let g:easytags_resolve_links = 1
-let g:easytags_suppress_ctags_warning = 1
-
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Keybindings
+"
 
 " Buffer navigation key-bindings
 nmap <leader>p :bprevious<CR>
 nmap <leader>n :bnext<CR>
+
+" Map leader to custom kev
+let mapleader = ","
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -225,4 +195,16 @@ nnoremap ; :
 
 " Easy toggle word wrap
 map <F7> :set wrap!<cr>
+
+" Clear out search with leader+space
+nnoremap <leader><space> :noh<cr>
+
+" Map cut and paste actions
+vnoremap <C-c> "+y
+vnoremap <C-x> "+x
+vnoremap <C-v> "+gP
+
+" autocompletion with Ctrl+space
+inoremap <c-space> <c-n>
+inoremap <Nul> <c-n>
 

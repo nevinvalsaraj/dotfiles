@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/routeaccess/.zprezto'
-let g:netrw_dirhist_2='/home/routeaccess/gitrepos/github/os-lab/.git'
-let g:netrw_dirhist_3='/home/routeaccess/.config/spotify'
-let g:netrw_dirhist_4='/home/routeaccess/Temp'
-let g:netrw_dirhist_5='/usr/share/dbus-1/services'
-let g:netrw_dirhist_6='/home/routeaccess/cloud-copy/workspace/rails/myapp'
