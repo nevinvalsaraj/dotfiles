@@ -19,7 +19,8 @@ Plugin 'altercation/vim-colors-solarized'
 " IDE plugins
 Plugin 'tpope/vim-vinegar'
 Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
@@ -31,9 +32,9 @@ Plugin 'digitaltoad/vim-jade'
 
 " Git plugins
 Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
 
 call vundle#end()
+filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -48,6 +49,14 @@ if &t_Co >= 256 || has("gui_running")
     colorscheme mustang
     set background=dark
 endif
+
+" Enable trackpad/mouse scrolling
+set mouse=a
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 
 set omnifunc=syntaxcomplete#Complete    " Set up autocomplete
 hi Normal ctermbg   =none              " Make brackground transparent
@@ -133,12 +142,11 @@ nnoremap <C-H> <C-W><C-H>
 
 " vim-airline
 "
-set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
 set laststatus=2
 set noshowmode                  " hide default mode indicator
-let g:airline_theme             = 'luna'
-let g:airline_powerline_fonts   = 1
-let g:Powerline_symbols         = 'fancy'
+let g:airline_powerline_fonts   = 0
+let g:airline_left_sep          = ''
+let g:airline_right_sep         = ''
 let g:airline#extensions#tabline#enabled = 1
                                 " enable list of buffers on top
 
@@ -179,12 +187,12 @@ map <C-n> :NERDTreeToggle<CR>
 " Keybindings
 "
 
+" Map leader to custom kev
+let mapleader = ","
+
 " Buffer navigation key-bindings
 nmap <leader>p :bprevious<CR>
 nmap <leader>n :bnext<CR>
-
-" Map leader to custom kev
-let mapleader = ","
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
