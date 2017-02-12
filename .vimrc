@@ -15,6 +15,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'croaker/mustang-vim'
 Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 " IDE plugins
 Plugin 'tpope/vim-vinegar'
@@ -25,6 +26,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'vim-scripts/tComment'
 
 " Language and syntax highlighting
 Plugin 'kchmck/vim-coffee-script'
@@ -38,6 +41,12 @@ filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+" Disable beeping and window flashing
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+    autocmd GUIEnter * set visualbell t_vb=
+endif
 
 " switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_running")
@@ -98,6 +107,7 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
 " Set exception for html and xml
 autocmd filetype html,xml set listchars-=tab:>.
+autocmd filetype js,coffee set shiftwidth=2
 
 set undolevels=1000     " increase levels of undo
 set title               " change the terminal's title
@@ -124,6 +134,12 @@ cmap w!! w !sudo tee % >/dev/null
 
 " http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
 autocmd Filetype gitcommit setlocal spell textwidth=72
+
+" https://robots.thoughtbot.com/opt-in-project-specific-vim-spell-checking-and-word-completion
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+
+" Spell-check Markdown files
+autocmd FileType markdown setlocal spell
 
 " Splits
 set splitbelow
@@ -215,4 +231,3 @@ vnoremap <C-v> "+gP
 " autocompletion with Ctrl+space
 inoremap <c-space> <c-n>
 inoremap <Nul> <c-n>
-
