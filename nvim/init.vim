@@ -1,71 +1,48 @@
-set nocompatible
 set modelines=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle
+" Vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
-filetype off
-set rtp+=~/.vim/vundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/vundle'
+call plug#begin('~/.local/share/nvim/plugged')
 
 " Appearance
-Plugin 'tpope/vim-sensible'
-Plugin 'croaker/mustang-vim'
-Plugin 'tomasr/molokai'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'croaker/mustang-vim'
+Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " IDE plugins
-Plugin 'tpope/vim-vinegar'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/syntastic'
-Plugin 'kien/ctrlp.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'vim-scripts/tComment'
+Plug 'tpope/vim-vinegar'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'}
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/syntastic'
+Plug 'kien/ctrlp.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'easymotion/vim-easymotion'
+Plug 'vim-scripts/tComment'
 
 " Language and syntax highlighting
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'digitaltoad/vim-jade'
+Plug 'kchmck/vim-coffee-script'
+Plug 'digitaltoad/vim-jade'
 
 " Git plugins
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
-call vundle#end()
-filetype plugin indent on
+" Initialize plugin system
+call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" Disable beeping and window flashing
-set noerrorbells visualbell t_vb=
-if has('autocmd')
-    autocmd GUIEnter * set visualbell t_vb=
-endif
-
-" switch syntax highlighting on, when the terminal has colors
-if &t_Co > 2 || has("gui_running")
-    syntax on
-endif
-
+" Use true colors in terminal
+set termguicolors
 " Load syntax highlighting theme if supports >256 colors
 if &t_Co >= 256 || has("gui_running")
-    colorscheme mustang
-    set background=dark
+    colorscheme molokai
 endif
-
-" Enable trackpad/mouse scrolling
-set mouse=a
-if has("mouse_sgr")
-    set ttymouse=sgr
-else
-    set ttymouse=xterm2
-end
 
 set omnifunc=syntaxcomplete#Complete    " Set up autocomplete
 hi Normal ctermbg   =none              " Make brackground transparent
@@ -83,8 +60,6 @@ set noswapfile
 " Search rules
 "
 set ignorecase          " ignores case when searching
-set hlsearch            " highlight searches
-set incsearch           " show search matches as you type
 set ignorecase          " ignore case when searching
 set smartcase           " ignore case if search pattern is all lowercase,
                         " case-sensitive otherwise
@@ -111,8 +86,6 @@ autocmd filetype js,coffee set shiftwidth=2
 
 set undolevels=1000     " increase levels of undo
 set title               " change the terminal's title
-set visualbell          " don't beep
-set noerrorbells        " don't beep
 
 
 " Wildignore rules to restrict matching
@@ -158,7 +131,6 @@ nnoremap <C-H> <C-W><C-H>
 
 " vim-airline
 "
-set laststatus=2
 set noshowmode                  " hide default mode indicator
 let g:airline_powerline_fonts   = 0
 let g:airline_left_sep          = ''
