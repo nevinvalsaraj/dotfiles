@@ -1,0 +1,18 @@
+{
+  "name": "dotfiles",
+  "version": "1.0.0",
+  "description": "Nevin's dotfiles repository",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nevin Valsaraj",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-curl": "^2.2.0",
+    "grunt-git": "^1.0.3",
+    "grunt-symlink": "^0.4.0",
+    "userhome": "^1.0.0"
+  }
+}
