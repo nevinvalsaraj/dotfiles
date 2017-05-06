@@ -44,6 +44,9 @@ if &t_Co >= 256 || has("gui_running")
     colorscheme molokai
 endif
 
+" Enable trackpad/mouse scrolling
+set mouse=a
+
 set omnifunc=syntaxcomplete#Complete    " Set up autocomplete
 hi Normal ctermbg   =none              " Make brackground transparent
 set colorcolumn     =80
@@ -132,6 +135,7 @@ nnoremap <C-H> <C-W><C-H>
 " vim-airline
 "
 set noshowmode                  " hide default mode indicator
+let g:airline_theme             = 'powerlineish'
 let g:airline_powerline_fonts   = 0
 let g:airline_left_sep          = ''
 let g:airline_right_sep         = ''

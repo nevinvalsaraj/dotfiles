@@ -55,7 +55,7 @@ endif
 
 " Load syntax highlighting theme if supports >256 colors
 if &t_Co >= 256 || has("gui_running")
-    colorscheme mustang
+    colorscheme molokai
     set background=dark
 endif
 
@@ -160,6 +160,7 @@ nnoremap <C-H> <C-W><C-H>
 "
 set laststatus=2
 set noshowmode                  " hide default mode indicator
+let g:airline_theme             = 'powerlineish'
 let g:airline_powerline_fonts   = 0
 let g:airline_left_sep          = ''
 let g:airline_right_sep         = ''
