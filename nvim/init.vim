@@ -9,6 +9,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Appearance
 Plug 'croaker/mustang-vim'
 Plug 'tomasr/molokai'
+Plug 'dracula/vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'nathanaelkane/vim-indent-guides'
 
@@ -41,7 +42,7 @@ call plug#end()
 set termguicolors
 " Load syntax highlighting theme if supports >256 colors
 if &t_Co >= 256 || has("gui_running")
-    colorscheme molokai
+    colorscheme dracula
 endif
 
 " Enable trackpad/mouse scrolling

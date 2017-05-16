@@ -14,6 +14,7 @@ Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-sensible'
 Plugin 'croaker/mustang-vim'
 Plugin 'tomasr/molokai'
+Plugin 'dracula/vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'nathanaelkane/vim-indent-guides'
 
@@ -55,7 +56,7 @@ endif
 
 " Load syntax highlighting theme if supports >256 colors
 if &t_Co >= 256 || has("gui_running")
-    colorscheme molokai
+    colorscheme dracula
     set background=dark
 endif
 
