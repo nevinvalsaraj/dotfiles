@@ -16,14 +16,14 @@ Plug 'nathanaelkane/vim-indent-guides'
 " IDE plugins
 Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'}
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/syntastic'
 Plug 'kien/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/tComment'
+Plug 'wellle/targets.vim'
 
 " Language and syntax highlighting
 Plug 'kchmck/vim-coffee-script'
@@ -56,6 +56,7 @@ set fileformats     =unix,dos
 set encoding        =utf-8
 set nowrap                              " don't wrap lines
 set number                              " show line numbers
+set relativenumber                      " show relative line numbers
 
 " Remove backup options
 set nobackup
@@ -133,15 +134,12 @@ nnoremap <C-H> <C-W><C-H>
 "               PLUGIN CONFIGURATIONS
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
-" vim-airline
+
+" lightline.vim
 "
-set noshowmode                  " hide default mode indicator
-let g:airline_theme             = 'powerlineish'
-let g:airline_powerline_fonts   = 0
-let g:airline_left_sep          = ''
-let g:airline_right_sep         = ''
-let g:airline#extensions#tabline#enabled = 1
-                                " enable list of buffers on top
+let g:lightline = {
+    \ 'colorscheme': 'Dracula',
+    \ }
 
 
 " vim-gitgutter
@@ -199,6 +197,3 @@ vnoremap <C-c> "+y
 vnoremap <C-x> "+x
 vnoremap <C-v> "+gP
 
-" autocompletion with Ctrl+space
-inoremap <c-space> <c-n>
-inoremap <Nul> <c-n>
