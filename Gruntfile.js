@@ -17,9 +17,9 @@ module.exports = function(grunt) {
             },
             
             vim: {
-                path_vimrc: '<%=  config.path_dotfiles%>' + '/.vimrc',
+                path_vimrc: '<%=  config.path_dotfiles%>' + '/vim/vimrc',
                 path_vimrc_system: userhome('.vimrc'),
-                path_vim: '<%= config.path_dotfiles%>' + '/.vim',
+                path_vim: '<%= config.path_dotfiles%>' + '/vim',
                 path_vim_system: userhome('.vim'),
                 path_vundle: userhome('.vim/vundle/Vundle.vim'),
                 url_vundle: 'https://github.com/VundleVim/Vundle.vim.git'
