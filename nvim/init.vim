@@ -19,7 +19,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'}
 Plug 'itchyny/lightline.vim'
 Plug 'majutsushi/tagbar'
 Plug 'neomake/neomake'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/tComment'
