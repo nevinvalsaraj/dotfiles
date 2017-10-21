@@ -18,7 +18,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'}
 Plug 'itchyny/lightline.vim'
 Plug 'majutsushi/tagbar'
-Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
 Plug 'kien/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'easymotion/vim-easymotion'
@@ -147,17 +147,12 @@ let g:lightline = {
 let g:gitgutter_updatetime = 750
 
 
-" Syntastic
+" Neomake
 "
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-nnoremap <F9> :SyntasticToggleMode<CR>
+" When writing a buffer, and on normal mode changes (after 750ms).
+call neomake#configure#automake('nw', 750)
+" open list window automatically
+let g:neomake_open_list = 2
 
 
 " Toggle Tagbar
