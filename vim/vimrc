@@ -21,7 +21,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 " IDE plugins
 Plugin 'tpope/vim-vinegar'
 Plugin 'scrooloose/nerdtree'
-Plugin 'itchyny/lightline.vim'
+Plugin 'vim-airline/vim-airline'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -165,11 +165,9 @@ let g:indent_guides_guide_size=1
 let g:indent_guides_enable_on_vim_startup=1
 
 
-" lightline.vim
+" vim-airline
 "
-let g:lightline = {
-    \ 'colorscheme': 'Dracula',
-    \ }
+let g:airline#extensions#tabline#enabled=1
 
 
 " vim-gitgutter
