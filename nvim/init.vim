@@ -119,6 +119,9 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown
 " Spell-check Markdown files
 autocmd FileType markdown setlocal spell
 
+" Overwrite original inode for crontab files
+autocmd FileType crontab setlocal bkc=yes
+
 " Splits
 set splitbelow
 set splitright
