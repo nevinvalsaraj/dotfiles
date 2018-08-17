@@ -1,0 +1,16 @@
+[user]
+	name = Nevin Valsaraj
+	email = nevin.valsaraj32@gmail.com
+	signingkey = EDD8313C
+[core]
+	editor = nvim
+	autocrlf = input
+	excludesfile = /Users/nevin/.gitignore
+[credential]
+	helper = osxkeychain
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[gpg]
+	program = /usr/local/bin/gpg
