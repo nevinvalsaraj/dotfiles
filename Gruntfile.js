@@ -15,7 +15,7 @@ module.exports = function(grunt) {
                 path: '<%= config.path_dotfiles%>' + '/nvim',
                 path_system: userhome('.config/nvim')
             },
-            
+
             vim: {
                 path_vimrc: '<%=  config.path_dotfiles%>' + '/vim/vimrc',
                 path_vimrc_system: userhome('.vimrc'),
@@ -23,6 +23,13 @@ module.exports = function(grunt) {
                 path_vim_system: userhome('.vim'),
                 path_vundle: userhome('.vim/vundle/Vundle.vim'),
                 url_vundle: 'https://github.com/VundleVim/Vundle.vim.git'
+            },
+
+            git: {
+                path_gitconfig_system: userhome('.gitconfig'),
+                path_gitconfig: '<%= config.path_dotfiles%>' + '/git/gitconfig',
+                path_gitignore_system: userhome('.gitignore'),
+                path_gitignore: '<%= config.path_dotfiles%>' + '/git/gitignore'
             }
         },
 
@@ -58,6 +65,16 @@ module.exports = function(grunt) {
                 dest: "<%= config.vim.path_vim_system%>",
                 relativeSrc: "<%= config.vim.path_vim%>",
                 options: {type: 'dir'}
+            },
+
+            gitconfig: {
+                dest: "<%= config.git.path_gitconfig_system%>",
+                relativeSrc: "<%= config.git.path_gitconfig%>"
+            },
+
+            gitignore: {
+                dest: "<%= config.git.path_gitignore_system%>",
+                relativeSrc: "<%= config.git.path_gitignore%>"
             }
         }
 
@@ -68,12 +85,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-symlink');
 
     grunt.registerTask('neovim', ['curl:vimplug', 'symlink:neovim']);
-
     grunt.registerTask('vim', ['gitclone:vundle', 'symlink:vimrc', 'symlink:vim']);
-
+    grunt.registerTask('git', ['symlink:gitconfig', 'symlink:gitignore']);
     grunt.registerTask('banner', function(){
         grunt.log.writeln(grunt.file.read('templates/banner'));
     });
-
     grunt.registerTask('default', ['banner']);
 };
