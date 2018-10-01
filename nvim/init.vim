@@ -9,6 +9,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'tomasr/molokai'
 Plug 'itchyny/lightline.vim'
+Plug 'w0rp/ale'
+Plug 'maximbaz/lightline-ale'
 
 " Initialize plugin system
 call plug#end()
@@ -72,6 +74,30 @@ set noshowmode
 
 " vim-gitgutter
 let g:gitgutter_updatetime = 750
+
+
+" ale
+"
+" Enable completion where available.
+let g:ale_completion_enabled = 1
+
+
+" lightline-ale
+let g:lightline = {}
+
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
