@@ -12,6 +12,7 @@
     "grunt": "^1.0.1",
     "grunt-curl": "^2.2.0",
     "grunt-git": "^1.0.3",
+    "grunt-mkdir": "^1.0.0",
     "grunt-symlink": "^0.4.0",
     "userhome": "^1.0.0"
   }
