@@ -10,7 +10,7 @@
   "license": "MIT",
   "devDependencies": {
     "grunt": "^1.0.1",
-    "grunt-curl": "^2.2.0",
+    "grunt-curl": "^2.5.1",
     "grunt-git": "^1.0.3",
     "grunt-mkdir": "^1.0.0",
     "grunt-symlink": "^0.4.0",
