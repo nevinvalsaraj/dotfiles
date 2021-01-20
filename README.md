@@ -1,24 +1,57 @@
 # Dotfiles
+My personal dotfiles repo and Node-powered bootstrapper.
 
-## Setting up Vim
-
-### 1. Clone my dotfile repo to your machine
-```bash
-git clone https://github.com/nevinvalsaraj/dotfiles.git ~/dotfiles
+## Setup
+- Ensure [NodeJS](https://nodejs.org/en/) is installed (`node` and `npm` commands should be available globally).
+- Clone the repo to your machine.
+```sh
+git clone https://github.com/nevinvalsaraj/dotfiles.git
+```
+- Install node dependencies for the bootstrapper.
+```node
+npm install
 ```
 
-### 2. Set up symlinks
-```bash
-ln -s ~/dotfiles/.vim ~/.vim
-ln -s ~/dotfiles/.vimrc ~/.vimrc
+## Installing Vim Configuration
+- Install vim.
+- Copy vim configuration files by running:
+```node
+npx grunt vim
 ```
-
-### 3. Clone Vundle
-```bash
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/vundle/Vundle.vim
+- Launch vim (Ignore colorscheme load errors that appear).
+- Inside vim, run:
+```viml
+:PlugInstall
 ```
+to download `vimplug` dependencies.
+- Restart vim.
 
-### 4. Install Vundle plugins
-Launch Vim and run `:PluginInstall`. Wait for it to complete.
+## Installing neovim Configuration
+- Install neovim.
+- Copy neovim configuration files by running:
+```node
+npx grunt neovim
+```
+- Launch neovim (Ignore colorscheme load errors that appear).
+- Inside neovim, run:
+```viml
+:PlugInstall
+```
+to download `vimplug` dependencies.
+- Restart neovim.
 
-### 5. Restart Vim
+# Installing Zsh Configuration
+- Install zsh.
+- Copy zsh configuration files by running:
+```node
+npx grunt zsh
+```
+- Run zsh.
+
+# Installing Git configuration
+- Install git.
+- Copy git configuration files by running:
+```node
+npx grunt git
+```
+- Run git.
