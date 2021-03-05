@@ -1,60 +1,65 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+# Enable autocomplete
+autoload -Uz compinit
+compinit
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+# Enable menu driven completion
+zstyle ':completion:*' menu select
 
-# Customize to your needs...
-ifconfig_ofif (){
-    ifconfig | grep $1 -A1 | tail -n1 | grep "inet" | cut -d ' ' -f 2
-}
+# Print empty line before prompt
+precmd() { print "" }
 
-alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
-alias less="vimpager"
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" \
-    && source "${HOME}/.iterm2_shell_integration.zsh"
+### Zplugin configuration start
 
-alias vi="nvim"
+# Zplugin setup
+source ~/.zplugin/bin/zplugin.zsh
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
 
-# Open (current) git repository's remote in the browser
-git-remote-open(){
-    # Parse remote and branch as parameter or get default
-    remote=`git remote | head -n 1`
-    remote=${1-$remote}
-    branch=`git rev-parse --abbrev-ref HEAD`
-    branch=${2-$branch}
+# Autosuggestions & fast-syntax-highlighting
+zinit ice wait lucid atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
+zinit light zdharma/fast-syntax-highlighting
 
-    # Get remote URL and strip .git suffix
-    baseurl=`git remote get-url $remote`
-    baseurl=${baseurl%".git"}
+# zsh-autosuggestions
+zinit ice wait lucid atload"!_zsh_autosuggest_start"
+zinit light zsh-users/zsh-autosuggestions
 
-    # Convert SSH URLs to HTTPS URLs
-    if [[ $baseurl = "git@"* ]]; then
-        baseurl=${baseurl//://}
-        baseurl=${baseurl//git@/https://}
-    fi
+# zsh-completions
+zinit ice wait lucid blockf atpull"zinit creinstall -q ."
+zinit light zsh-users/zsh-completions
 
-    # Build repository URL
-    if [[ ( $baseurl = *"github.com"* ) || ( $baseurl = *"gitlab.com"* ) ]];
-    then
-        url=$baseurl/tree/$branch
-    elif [[ $baseurl = *"visualstudio.com"* ]]; then
-        url=$baseurl/?version=GB$branch
-    fi
+# sharkdp/bat
+zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit light sharkdp/bat
 
-    echo "$url"
+# LS_COLORS
+# ogham/exa also uses the definitions
+zinit ice wait"0c" lucid reset \
+    atclone"local P=${${(M)OSTYPE:#*darwin*}:+g}
+            \${P}sed -i \
+            '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
+            \${P}dircolors -b LS_COLORS > c.zsh" \
+    atpull'%atclone' pick"c.zsh" nocompile'!' \
+    atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
+zinit light trapd00r/LS_COLORS
 
-    # Open URL using browser
-    if [[ $OSTYPE = "darwin"* ]]; then
-        open $url
-    elif [[ $OSTYPE = "msys" ]]; then
-        start $url
-    fi
-}
+# ogham/exa, replacement for ls
+zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
+zinit light ogham/exa
+
+# zdharma/history-search-multi-word
+zstyle ":history-search-multi-word" page-size "11"
+zinit ice wait"1" lucid
+zinit light zdharma/history-search-multi-word
+
+# set prompt theme
+zinit ice pick"async.zsh" src"pure.zsh"
+zinit light sindresorhus/pure
+zstyle :prompt:pure:path color cyan
+zstyle :prompt:pure:prompt:success color green
+zstyle :prompt:pure:prompt:error color red
+zstyle :prompt:pure:prompt:continuation color white
+
+
+### Zplugin configuration end
+
