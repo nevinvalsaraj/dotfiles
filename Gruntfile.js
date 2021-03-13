@@ -2,7 +2,7 @@
 
 var userhome = require('userhome');
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     grunt.initConfig({
         config: {
@@ -23,11 +23,10 @@ module.exports = function(grunt) {
                     repository: 'https://github.com/VundleVim/Vundle.vim.git'
                 }
             },
-            prezto: {
+            zinit: {
                 options: {
-                    directory: userhome('.zprezto'),
-                    repository: 'https://github.com/sorin-ionescu/prezto.git',
-                    recursive: true
+                    directory: userhome('.zinit/bin'),
+                    repository: 'https://github.com/zdharma/zinit.git'
                 }
             }
         },
@@ -37,7 +36,7 @@ module.exports = function(grunt) {
             nvim: {
                 dest: userhome('.config/nvim'),
                 relativeSrc: '<%= config.path_dotfiles%>' + '/nvim',
-                options: {type: 'dir'}
+                options: { type: 'dir' }
             },
 
             // vim symlinks
@@ -48,7 +47,7 @@ module.exports = function(grunt) {
             vim: {
                 dest: userhome('.vim'),
                 relativeSrc: '<%= config.path_dotfiles%>' + '/vim',
-                options: {type: 'dir'}
+                options: { type: 'dir' }
             },
 
             // git symlinks
@@ -62,36 +61,21 @@ module.exports = function(grunt) {
             },
 
             // zsh symlinks
-            zlogin: {
-                dest: userhome('.zlogin'),
-                relativeSrc: '<%= config.path_dotfiles%>' + '/zsh/zlogin'
-            },
             zshrc: {
                 dest: userhome('.zshrc'),
                 relativeSrc: '<%= config.path_dotfiles%>' + '/zsh/zshrc'
-            },
-            zshenv: {
-                dest: userhome('.zshenv'),
-                relativeSrc: '<%= config.path_dotfiles%>' + '/zsh/zshenv'
-            },
-            zprofile: {
-                dest: userhome('.zprofile'),
-                relativeSrc: '<%= config.path_dotfiles%>' + '/zsh/zprofile'
-            },
-            zpreztorc: {
-                dest: userhome('.zpreztorc'),
-                relativeSrc: '<%= config.path_dotfiles%>' + '/zsh/zpreztorc'
-            },
-            zlogout: {
-                dest: userhome('.zlogout'),
-                relativeSrc: '<%= config.path_dotfiles%>' + '/zsh/zlogout'
             }
         },
 
         mkdir: {
             dotconfig: {
-                options:{
+                options: {
                     create: [userhome('.config')]
+                }
+            },
+            dotzinit: {
+                options: {
+                    create: [userhome('.zinit')]
                 }
             }
         }
@@ -106,15 +90,11 @@ module.exports = function(grunt) {
     grunt.registerTask('vim', ['gitclone:vundle', 'symlink:vimrc', 'symlink:vim']);
     grunt.registerTask('git', ['symlink:gitconfig', 'symlink:gitignore']);
     grunt.registerTask('zsh', [
-        'gitclone:prezto',
-        'symlink:zlogin',
-        'symlink:zshrc',
-        'symlink:zshenv',
-        'symlink:zprofile',
-        'symlink:zpreztorc',
-        'symlink:zlogout'
+        'mkdir:dotzinit',
+        'gitclone:zinit',
+        'symlink:zshrc'
     ]);
-    grunt.registerTask('banner', function(){
+    grunt.registerTask('banner', function () {
         grunt.log.writeln(grunt.file.read('templates/banner'));
     });
     grunt.registerTask('default', ['banner']);
