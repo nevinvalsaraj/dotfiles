@@ -55,10 +55,6 @@ module.exports = function (grunt) {
                 dest: userhome('.gitconfig'),
                 relativeSrc: '<%= config.path_dotfiles%>' + '/git/gitconfig'
             },
-            gitignore: {
-                dest: userhome('.gitignore'),
-                relativeSrc: '<%= config.path_dotfiles%>' + '/git/gitignore'
-            },
 
             // zsh symlinks
             zshrc: {
@@ -88,7 +84,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('neovim', ['curl:vimplug', 'mkdir:dotconfig', 'symlink:nvim']);
     grunt.registerTask('vim', ['gitclone:vundle', 'symlink:vimrc', 'symlink:vim']);
-    grunt.registerTask('git', ['symlink:gitconfig', 'symlink:gitignore']);
+    grunt.registerTask('git', ['symlink:gitconfig']);
     grunt.registerTask('zsh', [
         'mkdir:dotzinit',
         'gitclone:zinit',
