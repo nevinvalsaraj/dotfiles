@@ -6,6 +6,9 @@ compinit
 zstyle ':completion:*' menu select
 # Enable case-insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# Enable autocompletion for SSH hosts and logins
+zstyle ':completion:*:ssh:*' hosts
+zstyle ':completion:*:slogin:*' hosts
 
 # Set up fzf
 source /usr/share/doc/fzf/examples/key-bindings.zsh
