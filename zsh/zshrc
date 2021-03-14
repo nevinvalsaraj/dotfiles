@@ -1,3 +1,4 @@
+fpath+=~/.zfunc
 # Enable autocomplete
 autoload -Uz compinit
 compinit
@@ -54,6 +55,14 @@ zinit light ogham/exa
 
 # set exa aliases
 zinit light DarrinTisdale/zsh-aliases-exa
+
+# sharkdp/fd
+zinit ice as"program" from"gh-r" mv"fd* -> fd" pick"fd/fd"
+zinit light sharkdp/fd
+
+# BurntSushi/ripgrep
+zinit ice as"program" from"gh-r" mv"ripgrep* -> rg" pick "rg/rg"
+zinit light BurntSushi/ripgrep
 
 # zdharma/history-search-multi-word
 zstyle ":history-search-multi-word" page-size "11"
