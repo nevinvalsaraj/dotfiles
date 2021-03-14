@@ -4,7 +4,12 @@ compinit
 
 # Enable menu driven completion
 zstyle ':completion:*' menu select
+# Enable case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
+# Set up fzf
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
 
 ### Zplugin configuration start
 
