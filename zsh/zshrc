@@ -1,4 +1,3 @@
-fpath+=~/.zfunc
 # Enable autocomplete
 autoload -Uz compinit
 compinit
@@ -15,7 +14,8 @@ zstyle ':completion:*:slogin:*' hosts
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 source /usr/share/doc/fzf/examples/completion.zsh
 
-### Zplugin configuration start
+### Zplugin configuration
+###
 
 # Zplugin setup
 source ~/.zinit/bin/zinit.zsh
@@ -81,9 +81,15 @@ zstyle :prompt:pure:prompt:continuation color white
 zstyle ':prezto:module:ssh:load' identities 'id_nevin_github'
 zinit snippet PZT::modules/ssh
 
+## Configure completions
+
 # ryutok/rust-zsh-completions
-zinit ice wait lucid
 zinit light ryutok/rust-zsh-completions
 
-### Zplugin configuration end
+autoload -Uz compinit
+compinit
 
+## End configure completions
+
+### End zplugin configuration
+###
