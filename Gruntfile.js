@@ -60,6 +60,12 @@ module.exports = function (grunt) {
             zshrc: {
                 dest: userhome('.zshrc'),
                 relativeSrc: '<%= config.path_dotfiles%>' + '/zsh/zshrc'
+            },
+
+            // emacs symlinks
+            emacsconfig: {
+                dest: userhome('.emacs.el'),
+                relativeSrc: '<%= config.path_dotfiles%>' + '/emacs/emacs.el'
             }
         },
 
@@ -90,6 +96,7 @@ module.exports = function (grunt) {
         'gitclone:zinit',
         'symlink:zshrc'
     ]);
+    grunt.registerTask('emacs', ['symlink:emacsconfig']);
     grunt.registerTask('banner', function () {
         grunt.log.writeln(grunt.file.read('templates/banner'));
     });
