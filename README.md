@@ -37,7 +37,7 @@ npx grunt neovim
 ```viml
 :PlugInstall
 ```
-to download `vimplug` dependencies.
+to download plugins.
 - Restart neovim.
 
 # Installing Zsh Configuration
@@ -46,12 +46,12 @@ to download `vimplug` dependencies.
 ```node
 npx grunt zsh
 ```
-- Run zsh.
+- Run zsh and wait for plugins to get downloaded and imported.
 
-# Installing Git configuration
-- Install git.
-- Copy git configuration files by running:
+# Installing Emacs configuration
+- Install emacs.
+- Copy emacs configuration file by running:
 ```node
-npx grunt git
+npx grunt emacs
 ```
-- Run git.
+- Run emacs and wait for plugins to get downloaded and imported.
