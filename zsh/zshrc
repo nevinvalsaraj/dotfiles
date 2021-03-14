@@ -81,5 +81,9 @@ zstyle :prompt:pure:prompt:continuation color white
 zstyle ':prezto:module:ssh:load' identities 'id_nevin_github'
 zinit snippet PZT::modules/ssh
 
+# ryutok/rust-zsh-completions
+zinit ice wait lucid
+zinit light ryutok/rust-zsh-completions
+
 ### Zplugin configuration end
 
