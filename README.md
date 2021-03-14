@@ -7,9 +7,9 @@ My personal dotfiles repo and Node-powered bootstrapper.
 ```sh
 git clone https://github.com/nevinvalsaraj/dotfiles.git
 ```
-- Install node dependencies for the bootstrapper.
+- Download node dependencies for the bootstrapper.
 ```node
-npm install
+npm ci
 ```
 
 ## Installing Vim Configuration
