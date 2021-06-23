@@ -64,12 +64,8 @@ zinit ice wait lucid
 zinit light zdharma/history-search-multi-word
 
 # set prompt theme
-zinit ice pick"async.zsh" src"pure.zsh"
-zinit light sindresorhus/pure
-zstyle :prompt:pure:path color cyan
-zstyle :prompt:pure:prompt:success color green
-zstyle :prompt:pure:prompt:error color red
-zstyle :prompt:pure:prompt:continuation color white
+zinit ice from="gh-r" as"program" atload'eval "$(starship init zsh)"'
+zinit load starship/starship
 
 # Set up ssh-agent
 zstyle ':prezto:module:ssh:load' identities 'id_nevin_github'
