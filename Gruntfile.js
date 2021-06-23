@@ -62,6 +62,11 @@ module.exports = function (grunt) {
                 relativeSrc: '<%= config.path_dotfiles%>' + '/zsh/zshrc'
             },
 
+            starship: {
+                dest: userhome('.config/starship.toml'),
+                relativeSrc: '<%= config.path_dotfiles%>' + '/zsh/starship.toml'
+            },
+
             // emacs symlinks
             emacsconfig: {
                 dest: userhome('.emacs.el'),
@@ -94,7 +99,8 @@ module.exports = function (grunt) {
     grunt.registerTask('zsh', [
         'mkdir:dotzinit',
         'gitclone:zinit',
-        'symlink:zshrc'
+        'symlink:zshrc',
+        'symlink:starship'
     ]);
     grunt.registerTask('emacs', ['symlink:emacsconfig']);
     grunt.registerTask('banner', function () {
