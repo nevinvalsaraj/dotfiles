@@ -1,10 +1,8 @@
 {
   "name": "dotfiles",
-  "version": "1.0.0",
   "description": "Nevin's dotfiles repository",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "grunt"
   },
   "author": "Nevin Valsaraj",
