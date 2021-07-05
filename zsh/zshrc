@@ -44,7 +44,7 @@ zinit ice wait lucid reset \
 zinit light trapd00r/LS_COLORS
 
 # ogham/exa, replacement for ls
-zinit ice wait lucid from"gh-r" as"program" mv"exa* -> exa"
+zinit ice wait lucid from"gh-r" as"program" mv"bin/exa* -> exa"
 zinit light ogham/exa
 
 # set exa aliases
@@ -67,9 +67,11 @@ zinit light zdharma/history-search-multi-word
 zinit ice from="gh-r" as"program" atload'eval "$(starship init zsh)"'
 zinit load starship/starship
 
-# Set up ssh-agent
-zstyle ':prezto:module:ssh:load' identities 'id_nevin_github'
-zinit snippet PZT::modules/ssh
+# Load identities
+function ssh-identity-load() {
+	zstyle ':prezto:module:ssh:load' identities 'id_nevin_github'
+	zinit snippet PZT::modules/ssh
+}
 
 # ryutok/rust-zsh-completions
 zinit light ryutok/rust-zsh-completions
