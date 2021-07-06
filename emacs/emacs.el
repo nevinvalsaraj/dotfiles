@@ -1,106 +1,87 @@
-(setq inhibit-startup-message t)
+(setq inhibit-startup-message t)	; disable startup message
+(menu-bar-mode -1)			; hide menu bar
+(tool-bar-mode -1)			; hide tool bar
+(column-number-mode)  		       	; show column numbers
+(global-display-line-numbers-mode)	; show line numbers
 
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(menu-bar-mode -1)
-
-
-;; Vertical Scroll
-(setq scroll-step 1)
-(setq scroll-margin 1)
-(setq scroll-conservatively 101)
-(setq scroll-up-aggressively 0.01)
-(setq scroll-down-aggressively 0.01)
-(setq auto-window-vscroll nil)
-(setq fast-but-imprecise-scrolling nil)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
-(setq mouse-wheel-progressive-speed nil)
-;; Horizontal Scroll
-(setq hscroll-step 1)
-(setq hscroll-margin 1)
+;; Configure scroll behaviour
+(setq scroll-margin 3
+      scroll-step 1
+      hscroll-step 1
+      hscroll-margin 1
+      scroll-conservatively 101
+      scroll-up-aggressively 0.01
+      scroll-down-aggressively 0.01
+      mouse-wheel-scroll-amount '(2 ((shift) . 1))	; mouse scrolls by 2 lines, by 1 if shift is held
+      mouse-wheel-progressive-speed nil)
 
 
-(set-fringe-mode 20)
-(setq visible-bell t)
-(load-theme 'wombat)
+;; --------------------------------------------------
+;; Using straight.el for package management
+;; --------------------------------------------------
 
-;; Add line numbers
-(column-number-mode)
-(global-display-line-numbers-mode 1)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-;; Indent on newline by default
-(define-key global-map (kbd "RET") 'newline-and-indent)
+;; Set up use-package integration with straight.el
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
-;; Use package management features
-(require 'package)
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
+;; --------------------------------------------------
 
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-always-ensure t)
-
-
-;; Use icons if running in GUI
-(use-package all-the-icons :if (display-graphic-p))
-
-;; Setup status bar
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-    :custom ((doom-modeline-height 15)))
-
-
-;; Load color theme
-(use-package doom-themes)
-(load-theme 'doom-vibrant t)
-
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-
-
-;; Setup ivy, counsel and swiper
-(use-package ivy
-  :diminish
-  :init
-  (use-package amx :defer t)
-  (use-package counsel :diminish :config (counsel-mode 1))
-  (use-package swiper :defer t)
-  (ivy-mode 1)
-  :custom
-  (ivy-use-virtual-buffers t)
-  (ivy-wrap t))
-
-
-;; Enable hinting for keybinds
-(use-package which-key
-  :diminish
-  :custom
-  (which-key-separator " ")
-  (which-key-prefix-prefix "+")
+;; Configure color theme
+;; https://github.com/hlissner/emacs-doom-themes
+(use-package doom-themes
   :config
-  (which-key-mode))
+  (load-theme 'doom-molokai t))
 
+;; Configure doom-modeline status bar
+;; https://github.com/seagle0128/doom-modeline
+(use-package doom-modeline
+  :init (doom-modeline-mode t)
+  :custom ((doom-modeline-height 15)))
+
+;; Magit git porcelain
+;; https://github.com/magit/magit
 (use-package magit)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(magit which-key counsel amx ivy rainbow-delimiters doom-themes doom-modeline all-the-icons use-package)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; Rainbow delimiters
+;; https://github.com/Fanael/rainbow-delimiters
+(use-package rainbow-delimiters)
+(with-eval-after-load 'rainbow-delimiters
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+
+;; Ivy, Counsel and Swiper
+;; https://github.com/abo-abo/swiper
+(use-package ivy
+  :diminish
+  :config
+  (ivy-mode)
+  (setq ivy-use-virtual-buffers t
+	ivy-count-format "(%d/%d) "))
+
+(use-package counsel
+  :after ivy
+  :config (counsel-mode))
+
+;; Ivy-rich: Rich output from Ivy and Counsel
+;; https://github.com/Yevgnen/ivy-rich
+(use-package ivy-rich
+  :hook (counsel-mode . ivy-rich-mode)
+  :config
+  (setq ivy-rich-parse-remote-buffer nil))
+
+;; Use Ivy to search and diff files
+;; https://github.com/redguardtoo/find-file-in-project
+(use-package find-file-in-project)
