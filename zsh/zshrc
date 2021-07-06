@@ -94,5 +94,10 @@ function source-ros-noetic() {
 	 source /opt/ros/noetic/setup.zsh
 }
 
+# Source ROS Foxy
+function source-ros-foxy() {
+	 source /opt/ros/foxy/setup.zsh
+}
+
 ### End functions
 ###
