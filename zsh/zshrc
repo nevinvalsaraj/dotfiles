@@ -35,17 +35,6 @@ zinit light zsh-users/zsh-completions
 zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
 
-# LS_COLORS
-# ogham/exa also uses the definitions
-zinit ice wait lucid reset \
-    atclone"local P=${${(M)OSTYPE:#*darwin*}:+g}
-            \${P}sed -i \
-            '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
-            \${P}dircolors -b LS_COLORS > c.zsh" \
-    atpull'%atclone' pick"c.zsh" nocompile'!' \
-    atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
-zinit light trapd00r/LS_COLORS
-
 # ogham/exa, replacement for ls
 zinit ice wait lucid from"gh-r" as"program" mv"bin/exa* -> exa"
 zinit light ogham/exa
@@ -60,6 +49,10 @@ zinit light sharkdp/fd
 # BurntSushi/ripgrep
 zinit ice as"program" from"gh-r" mv"ripgrep* -> rg" pick "rg/rg"
 zinit light BurntSushi/ripgrep
+
+# sorin-ionescu/prezto/modules/history
+zinit ice svn
+zinit snippet PZT::modules/history
 
 # zdharma/history-search-multi-word
 zstyle ":history-search-multi-word" page-size "11"
@@ -86,6 +79,7 @@ compinit
 # Load identities
 function ssh-identity-load() {
 	 zstyle ':prezto:module:ssh:load' identities 'id_nevin_github'
+	 zinit ice svn
 	 zinit snippet PZT::modules/ssh
 }
 
