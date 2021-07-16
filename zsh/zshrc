@@ -54,6 +54,10 @@ zinit light BurntSushi/ripgrep
 zinit ice svn
 zinit snippet PZT::modules/history
 
+# sorin-ionescu/prezto/modules/git
+zinit ice svn
+zinit snippet PZT::modules/git
+
 # zdharma/history-search-multi-word
 zstyle ":history-search-multi-word" page-size "11"
 zinit ice wait lucid
