@@ -71,7 +71,13 @@ module.exports = function (grunt) {
             emacsconfig: {
                 dest: userhome('.emacs.el'),
                 relativeSrc: '<%= config.path_dotfiles%>' + '/emacs/emacs.el'
-            }
+            },
+
+	    // kde symlinks
+	    toucheggconfig: {
+		dest: userhome('.config/touchegg/touchegg.conf'),
+		relativeSrc: '<%= config.path_dotfiles%>' + '/kde/touchegg.conf'
+	    }
         },
 
         mkdir: {
@@ -103,6 +109,7 @@ module.exports = function (grunt) {
         'symlink:starship'
     ]);
     grunt.registerTask('emacs', ['symlink:emacsconfig']);
+    grunt.registerTask('kde', ['symlink:toucheggconfig']);
     grunt.registerTask('banner', function () {
         grunt.log.writeln(grunt.file.read('templates/banner'));
     });
